@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<!-- AJAX testing.  this set uses jq ajax get() method instead of original load() -->
+<!-- see AjaxTabTest set -->
+<!-- swap html tag class property with id and test- this would be more similar to SAJ methodology.  class was in orig web app dev book -->
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Ajax Tab Test Get method w/ XML</title>
+	<script type="text/javascript" src= "https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src= "webroot/js/ajaxTabGet.js"></script>
+	<link type="text/css" rel="stylesheet" href="style/ajaxTabGet.css"  >
+</head>
+<body>
+	<main> <!--<main> is a valid tag accoriding to W3C shcools.Not sure where the error is generated from, but main is new to HTML5,a nd is used in Web App book, ansd assoc js file-->
+		<div class="container">
+ 			<div class = "tabs">
+ <!-- 	 pg 252 of webapp book 		-->
+				<a href = ""><span class="active">Main</span></a>
+				<a href = ""><span>History</span></a>
+				<a href = ""><span>Etymology</span></a>
+				<a href = ""><span>Math/Sci</span></a>
+				<a href = ""><span>Coding</span></a> 
+
+			</div>	
+ 			<div class = "content"> 
+			</div>			
+		</div>
+	</main>
+</body>
+</html>

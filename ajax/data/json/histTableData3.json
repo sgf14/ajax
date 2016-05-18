@@ -1,0 +1,40 @@
+[
+/**
+ * cant have comments in actively used JSON- created these copies to be able to add notes
+ * about the manual formatting of these
+ */
+ 
+//if manual entry have to be careful with this- json cant be malformed
+//cannot have commas at the last item in the group or before the end of 
+//the the json array- the downside of copy/paste
+//otherwise data will not show up.  I changed the commas to the beginning 
+//of each to try to address this, 
+//although it looks a little weird
+ 	{
+ 	"history_id": "122",
+ 	"title": "Agincourt",
+ 	"year": "1415",
+ 	"contents": "Henry IV"
+ 	},
+ 	 	
+ 	{
+ 	"history_id": "33", 
+ 	"title": "Bouviers",
+ 	"year": "1466",
+ 	"contents": "Calias, Francis III"
+ 	},
+ 	
+ 	{
+ 	"history_id": "ll",
+ 	"title": "Windows",
+ 	"year": "1989",
+ 	"contents": "Bill Gates"
+ 	},
+ 	
+ 	{
+ 	"history_id": "3245",
+ 	"title": "Belmar",
+ 	"year": "1143",
+ 	"contents": "Persia"
+ 	}
+]

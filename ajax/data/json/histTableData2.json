@@ -1,0 +1,33 @@
+[
+// if manual entry have to be careful with this- json cant be malformed
+// cannot have commas at the last item in the group or before the end of the the json array- the downside of copy/paste
+// otherwise data will not show up.  I changed the commas to the beginning of each to try to address this, 
+// although it looks a little weird
+ 	{
+ 	"history_id": "122" 
+ 	,"title": "Agincourt"
+ 	,"year": "1415"
+ 	,"contents": "Henry IV"
+ 	}
+ 	 	
+ 	,{
+ 	"history_id":"33" 
+ 	,"title":"Bouviers"
+ 	,"year":"1466"
+ 	,"contents":"Calias, Francis III"
+ 	}
+ 	 	
+ 	,{
+ 	"history_id":"eww"
+ 	,"title":"Priciples of Arithmetics"
+ 	,"year":"1786"
+ 	,"contents":"Gauss"
+ 	}
+ 	 	
+ 	,{
+ 	"history_id":"34,288" 
+ 	,"title":"Paper press"
+ 	,"year":"266"
+ 	,"contents":"China"
+ 	}
+]

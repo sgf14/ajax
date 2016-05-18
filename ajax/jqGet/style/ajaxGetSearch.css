@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+div {
+	border:1px ridge blue;
+	margin:2px;
+	padding:5px;
+}

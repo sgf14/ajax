@@ -1,0 +1,37 @@
+<historyinfo>
+	<record>
+		<history_id>Yellowstone</history_id>
+		<title>MT, WY, ID</title>
+		<year>March 1, 1872</year>
+		<contents>bison.jpg</contents>
+	</record>
+	
+	<record>
+		<history_id>22</history_id>
+		<title>more stuff</title>
+		<year>1933</year>
+		<contents>blah blah blah</contents>
+	</record>
+	
+	<record>
+		<history_id>abd</history_id>
+		<title>Armada</title>
+		<year>1588</year>
+		<contents>Phillip II of Spain</contents>
+	</record>
+	
+	<record>
+		<history_id>544</history_id>
+		<title>Fort Defiance</title>
+		<year>1763</year>
+		<contents>George Washington, Pittsburg</contents>
+	</record>
+	
+	<record>
+		<history_id>12,122</history_id>
+		<title>Thermopylae</title>
+		<year>322bc</year>
+		<contents>Persians, Sparta</contents>
+	</record>
+
+</historyinfo>

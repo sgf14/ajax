@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+/* placeholder for now */
+div {
+	border:1px ridge blue;
+/* 	margin:1px; */
+/* 	padding:1px; */
+}
+
+.hidden {
+	display:none;
+}
+
+form {
+	border:2px ridge green;
+	padding:1px;
+}

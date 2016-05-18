@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- DONT USE THIS FILE DIRECTLY- refactored the ajax tests into 3 folders for load(), get(), and post() -->
+<!-- to keep this a little more organized for reference later. -->
+
+<html>
+<head>
+<title>AJAX - Quagmire Data</title>
+		<meta charset = "utf-8" />
+		<script type="text/javascript" src= "https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src= "webroot/js/showUser.js"></script>
+<!-- 		<link rel="stylesheet" type="text/css" href="style/ajaxPostStyle.css" >  -->
+</head>
+<body>
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Select a person:</option>
+  <option value="1">Peter Griffin</option>
+  <option value="2">Lois Griffin</option>
+  <option value="3">Joseph Swanson</option>
+  <option value="4">Glenn Quagmire</option>
+  </select>
+</form>
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<!-- see W3 schools website/ php/ajax database section -->
+<head>
+	<title>AJAX - Quagmire Data W3 sch</title>
+	<script type="text/javascript" src= "https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src= "webroot/js/showUserW3sch.js"></script>
+</head>
+<body>
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Select a person:</option>
+  <option value="1">Peter Griffin</option>
+  <option value="2">Lois Griffin</option>
+  <option value="3">Glenn Quagmire</option>
+  <option value="4">Joseph Swanson</option>
+  </select>
+</form>
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+
+</body>
+</html>

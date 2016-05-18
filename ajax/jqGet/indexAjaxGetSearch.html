@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- PHP Cookbook version of AJAX, chap 13, pg 432 -->
+<!-- can use this as a template for search functions later.  This simple version works as of 04/24/16-->
+
+<!-- localhost testing- once xampp started paste '//localhost:8080/ajax/jqGet/indexAjaxGetSearch.html' into browser -->
+<!-- treat this the same as a server- start/use filezilla FTP to copy newly created files into localhost (xampp) as needed-->
+
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Ajax jq get- search template</title>
+		<script type="text/javascript" src= "https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src= "js/ajaxGetSearch.js"></script>
+		<link type="text/css" rel="stylesheet" href="style/ajaxGetSearch.css"  >
+	</head>
+	
+	<body>
+<!-- 		<form id="searchForm"> -->
+			<input type="text" id="q" />
+			<input type="button" id="go" value="Search"/>
+			<hr/>
+			<div id="output"></div>
+<!-- 		</form> -->
+	</body>
+</html>

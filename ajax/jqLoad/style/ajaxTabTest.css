@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+main {
+	background: white;
+	overflow: auto;
+}
+
+main .container {
+	float: left;
+	padding: 20px;
+	width: 855px;
+}
+
+.tabs a span {
+	display: inline-block;
+	border-radius: 5px 5px 0 0;
+	width: 100px;
+	margin-right: 10px;
+	text-align: center;
+	background: #ddd;
+	padding: 5px;
+	/* add webkit items/shadow etc- see what it does.  lpmj book pg 635 */
+}
+
+.tabs a span.active {
+	background: #eee;
+}
+
+.content {
+	background-color: #eee;
+	border-radius: 3px;
+	padding:10px;
+}
+
+.content ul {
+/* 	padding: 10px; */
+	
+}
+
+.content li {
+	margin: 5px;
+	padding: 3px;
+	border-radius: 3px;
+	background-color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+th {text-align: left;}
