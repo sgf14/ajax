@@ -1,4 +1,4 @@
-//05/14/16- the get part works to display values in unique forms w/ input fields for editing.  working on post part
+//05/17/16- this now works for both get and post
 var formOrigDataArr = [];
 //basic jq ready.  When page loads run this code
 $(document).ready(function () {
@@ -11,81 +11,53 @@ $(document).ready(function () {
 
 //handle the results 
 function showResults(data) {
-	//iterate through each record, create unique form id, populate data and append to html container tag 
+	//iterate through each record, create unique div id, populate data and append to html container tag 
 	$.each(data, function(key,val) {
-		//add form tag to group results and add a unique id per form
-		var form = $('<form class="formsHist" id="histForm' + val.history_id + '"></form>');
+		//add div tag to group results and add a unique id per form
+		var div = $('<div class="divsHist" id="histDiv' + val.history_id + '"></div>');
 		//id
-		//old span ver- spans dont have normal name/value pairs like input
-		//var idxTag = $('<span></span>').html(val.history_id);
 		var idxTag = $('<input name="historyId" value="' + val.history_id + '" ></input>');
-		//these dont work as I expected, alternate to serializeArray()- attempting to build orignal data array that 
-		//    can be compared to changes when save button pushed
-		//formOrigDataArr.push($("input").attr(id));
-		//formOrigDataArr.push($("input").val());
-		form.append(idxTag);
-		//title html
-		form.append('<br><label>Title:</label>&nbsp');
-		//title contents within editable input field
-		var item = $('<input type="text" name="title" value="' + val.title + '"></input>');
+		//could add an array function her so you get orig vals to compare to new entries to minimize posts below
 		//formOrigDataArr.push(name="title");
 		//formOrigDataArr.push('value="' + val.title + '"');
-		form.append(item);
-		//expand with other db fields in similar manner for fully fledged form
-		//var formOrigDataArr = $('#histForm' + val.history_id + '"').serializeArray();
-		formOrigDataArr = $('form').serializeArray();
-		//append the form group
-		$("#container").append(form);
-		//console.log(formOrigDataArr);
+		div.append(idxTag);
+		//title html
+		div.append('<br><label>Title:</label>&nbsp');
+		//title contents within editable input field
+		var item = $('<input type="text" name="title" value="' + val.title + '"></input>');
+		div.append(item);
+		//append the div to the form tag
+		$("#container").append(div);
 	});
 	
 }
 
 function loadDefault(){
-	$(".formsHist:first input").focus();
+	$(".formsDiv:first input").focus();
 	//note- w/o the return false the cursor doesnt appear in box [focus() doesnt work].
 	return false;
 }
 
 function ajaxPost() {
-	//hard coded test post works writing to db.  Need to change vars to for each loops to grab changs from form and update db
-	var idx = ""; //"14";
-	var newTitle = ""; //"myLtest";
-	var recordCount = countOf($("#container children"));
-	console.log(recordCount); 
+	// get revised data and create empty array to hold new data
+	var serializeHistForm = $("#container").serializeArray();
+	var newDataArray = [];
+	//console.log(serializeHistForm); 
+
+	//push updated form data
+	$.each(serializeHistForm, function(key, field) {
+		//console.log('Name: ' + field.name + ". Value: " + field.value);
+		newDataArray.push(field.name);
+		newDataArray.push(field.value);
+	});
 	
-	//build an array of form data
-//	var formNewDataArray = [];
-//	$.each($(".formsHist"), function() {
-//		//not working yet.  trying to build array of forms under #container, then use that array data to post to db
-//		formNewDataArray.push($(this).children("title").val());
-//	});
-//	console.log(formNewDataArray);
-	
-	
-	//old- practicing 
-	//this gets the 1st span value- 15- but then repeats 5 times, not looping thru the id to the next number. 
-	//it also only grabs the first input- the save button on the html- not the form values
-//	$.each($(".formsHist"), function() {
-//		idx = $("span").html();
-//		newTitle = $("input").val();
-//		//alert("idx= " + idx + "; title= " + newTitle);
-//		console.log("idx= " + idx + "; New title= " + newTitle);
-//		// the db post does work- commented out until I get it to loop through the values properly
-//		//$.post('php/ajaxPost.php', { 'history_id': idx, 'title': newTitle } );
-//	});
-//	
-//	$(".formsHist").each( function() {
-//		recordCount = recordCount + 1;
-//	});
-//	console.log(recordCount);
-	
-	//var recordCount = $("#testForm .hidden");
-//	for (var i = 1; i <= recordCount; i++) {
-//		idx = $("form input").val();
-//		//newTitle = $("#testForm .testFormTitle").val();
-//		console.log("idx= " + idx); // + "; title= " + newTitle);
-//	}
+	//send data to db via post- relies on regularly repeated format
+	for (var i = 0; i < newDataArray.length; i = i + 4) {
+		var newHistoryId = newDataArray[i+1];
+		var newTitle = newDataArray[i+3];
+		console.log(i +" id " + newHistoryId + ": title " + newTitle);
+		$.post('php/ajaxPost.php', { 'history_id': newHistoryId, 'title': newTitle } );
+	}
 	
 	//get from db again and call formatting func.
 	//TODO clear existing form then Get.  This code tacks on a 2nd form group to the bottom if uncommented
