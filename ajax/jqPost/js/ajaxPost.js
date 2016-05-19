@@ -1,5 +1,5 @@
 //05/17/16- this now works for both get and post
-var formOrigDataArr = [];
+var origDataArray = [];
 //basic jq ready.  When page loads run this code
 $(document).ready(function () {
 	//load page w/ initial data from db. Note upon successful get, .done calls a function- in this case to put cursor in first box
@@ -28,8 +28,15 @@ function showResults(data) {
 		div.append(item);
 		//append the div to the form tag
 		$("#container").append(div);
+		
+		//build array of original data.  optional- it just allows for posts limted to only those records that changed
+		//need text tags to pad so it aligns w/ serializedArray() output below
+		origDataArray.push("history_id");
+		origDataArray.push(val.history_id);
+		origDataArray.push("title");
+		origDataArray.push(val.title);
 	});
-	
+	//console.log(origDataArray);
 }
 
 function loadDefault(){
@@ -39,6 +46,8 @@ function loadDefault(){
 }
 
 function ajaxPost() {
+	//05/18/16- this approach seems pretty clunky, but it works.  and it only posts when data has changed
+	//havent found a more elegant approach yet online.
 	// get revised data and create empty array to hold new data
 	var serializeHistForm = $("#container").serializeArray();
 	var newDataArray = [];
@@ -55,11 +64,20 @@ function ajaxPost() {
 	for (var i = 0; i < newDataArray.length; i = i + 4) {
 		var newHistoryId = newDataArray[i+1];
 		var newTitle = newDataArray[i+3];
-		console.log(i +" id " + newHistoryId + ": title " + newTitle);
-		$.post('php/ajaxPost.php', { 'history_id': newHistoryId, 'title': newTitle } );
+		var idTagMatch = origDataArray[i+1] == newDataArray[i+1];
+		var titleTagNotMatch = origDataArray[i+3] != newDataArray[i+3];
+		//console.log(origDataArray[i+1] + " " + idTagMatch + ";" +  origDataArray[i+3] + " " + titleTagNotMatch);
+		
+		//conditional to test if record changed- only post those.  would need to modify NotMatch val if mulitple
+		// columns on form- this example only has title.
+		if (idTagMatch && titleTagNotMatch) {
+			//console.log(i +" id " + newHistoryId + ": title " + newTitle);
+			$.post('php/ajaxPost.php', { 'history_id': newHistoryId, 'title': newTitle } );
+		}
 	}
 	
 	//get from db again and call formatting func.
-	//TODO clear existing form then Get.  This code tacks on a 2nd form group to the bottom if uncommented
-	//$.get('php/ajaxGet.php', showResults);
+	//Clear existing form then refresh w db data. 
+	$("#container").html("");
+	$.get('php/ajaxGet.php', showResults);
 }
