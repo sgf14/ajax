@@ -5,10 +5,10 @@ var origDataArray = [];
 //basic jq ready.  When page loads run this code
 $(document).ready(function () {
 	//load page w/ initial data from db. Note upon successful get, .done calls a function- in this case to put cursor in first box
-	$.get('php/ajaxGet.php', showResults).done(loadDefault);
+	$.get('php/ajaxGet2.php', showResults).done(loadDefault);
 	//js import test, just need to call all reqd js files in html to have access to other js files functions
 	//  same as you are doing with jquery cdn in the html file
-	loadDefault2();
+	//loadDefault2();
 	//basic click handler
 	$("#saveFormData").click(ajaxPost);
 	
@@ -21,38 +21,31 @@ function showResults(data) {
 		//add div tag to group results and add a unique id per form
 		var div = $('<div class="divsHist" id="histDiv' + val.history_id + '"></div>');
 		//id
-		var idxTag = $('<input name="historyId" value="' + val.history_id + '" ></input>');
-		//could add an array function her so you get orig vals to compare to new entries to minimize posts below
-		//formOrigDataArr.push(name="title");
-		//formOrigDataArr.push('value="' + val.title + '"');
-		div.append(idxTag);
-		//title html
+		var idxVal = $('<input name="historyId" value="' + val.history_id + '" disabled="true" ></input>');
+		div.append(idxVal);
+		//title- not &nbsp is an alternate to adding spaces in html text
 		div.append('<br><label>Title:</label>&nbsp');
-		//title contents within editable input field
-		var item = $('<input type="text" name="title" value="' + val.title + '"></input>');
-		div.append(item);
+		var titleVal = $('<input type="text" name="title" value="' + val.title + '"></input>');
+		div.append(titleVal);
+		//year
+		div.append('<label> Year: </label>');
+		var yearVal = $('<input type="text" name="year" value="' + val.year + '"></input>');
+		div.append(yearVal);
 		//append the div to the form tag
 		$("#container").append(div);
 		
-		//build array of original data.  optional- it just allows for posts limted to only those records that changed
-		//need text tags to pad so it aligns w/ serializedArray() output below
+		//array of original data for later comparison to changed data
 		origDataArray.push("history_id");
 		origDataArray.push(val.history_id);
 		origDataArray.push("title");
 		origDataArray.push(val.title);
+		origDataArray.push("year");
+		origDataArray.push(val.year);
 	});
 	//console.log(origDataArray);
 }
 
-function loadDefault(){
-	$("#container:first input").focus();
-	//note- w/o the return false the cursor doesnt appear in box [focus() doesnt work].
-	return false;
-}
-
 function ajaxPost() {
-	//05/18/16- this approach seems pretty clunky, but it works.  and it only posts when data has changed
-	//havent found a more elegant approach yet online.
 	// get revised data and create empty array to hold new data
 	var serializeHistForm = $("#container").serializeArray();
 	var newDataArray = [];
@@ -65,24 +58,32 @@ function ajaxPost() {
 		newDataArray.push(field.value);
 	});
 	
-	//send data to db via post- relies on regularly repeated format
-	for (var i = 0; i < newDataArray.length; i = i + 4) {
+	//send data to db via post- relies on regularly repeated format- i=i+n where n=2*number of data columns
+	for (var i = 0; i < newDataArray.length; i = i + 6) {
 		var newHistoryId = newDataArray[i+1];
 		var newTitle = newDataArray[i+3];
+		var newYear = newDataArray[i+5];
+		//these are boolean type vars
 		var idTagMatch = origDataArray[i+1] == newDataArray[i+1];
-		var titleTagNotMatch = origDataArray[i+3] != newDataArray[i+3];
-		//console.log(origDataArray[i+1] + " " + idTagMatch + ";" +  origDataArray[i+3] + " " + titleTagNotMatch);
+		var dataTagsNotMatch = (origDataArray[i+3] != newDataArray[i+3])
+			|| (origDataArray[i+5] != newDataArray[i+5]);
+			//add more entries to match # of columns
 		
-		//conditional to test if record changed- only post those.  would need to modify NotMatch val if mulitple
-		// columns on form- this example only has title.
-		if (idTagMatch && titleTagNotMatch) {
+		console.log(origDataArray[i+1] + " " + idTagMatch + ";" +  origDataArray[i+3] + " " + dataTagsNotMatch);
+		
+		//conditional to test if record changed- only post those.  
+		if (idTagMatch && dataTagsNotMatch) {
 			//console.log(i +" id " + newHistoryId + ": title " + newTitle);
-			$.post('php/ajaxPost.php', { 'history_id': newHistoryId, 'title': newTitle } );
+			$.post('php/ajaxPost2.php', 
+				{ 
+				  'history_id': newHistoryId
+				, 'title': newTitle 
+				, 'year': newYear
+				} );
 		}
 	}
 	
-	//get from db again and call formatting func.
-	//Clear existing form then refresh w db data. 
+	//get from db again and call formatting func. Clear existing form then refresh w db data. 
 	$("#container").html("");
-	$.get('php/ajaxGet.php', showResults);
+	$.get('php/ajaxGet2.php', showResults).done(loadDefault);
 }

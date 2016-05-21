@@ -19,7 +19,7 @@ while($row = mysqli_fetch_array($query)) {
 	$queryResults[] = array(
 			'history_id' => $row['history_id'] //=> is a symbol used to retrieve object methods or properties.  In short this ensures the parser will treat it as a json object. see pg 118 of php book, the array within an array
 			,'title' => $row['title']		// gets the formmating right ie object () in F12 dev tools, net/XHR.  it is related to the -> symbol used to access object method/properties within php code
-//			,'year' => $row['year'] 
+			,'year' => $row['year'] 
 //			,'content' => $row['content']
 	);
 }
