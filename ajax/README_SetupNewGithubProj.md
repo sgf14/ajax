@@ -13,7 +13,7 @@ book examples and you want to 1) ensure its backed up and 2) you can track chang
   5) in Project Explorer you will now see a 'decorator' to the left '[{project name} master] of the project itself. but files are not under vc yet
   6) Click on files(s) right click Team/Commit, use Select All, add a commit note in sub-window and commit.  you will see them listed in the git tab at the bottom window
 
-2) Github
+2) Initial Github {master]
   1) once git is setup locally you can log onto your account online at github.com and add the project there.  in help bookmark go down to GitHub Tutorial portion.
   2) in Git hub select new repository.  Add project namecreate a new repository under your account.
     you can add a [root]readme.md file if you dont already have one.
@@ -26,5 +26,11 @@ book examples and you want to 1) ensure its backed up and 2) you can track chang
   8) Click 'Add All branches spec'.  this will populate the window below and 'Finish' button appears.  Click Finish'
   9) Click 'ok' in next window.  Project is now setup in GitHub.
 
-3) Pull/push requests
+3) Subsequent Updates to Github.
+  1) Standard practice (as I read it) reccomends that subsequent updates be pushed up to the remote (gitHub)as a branch off the master.  You can then (in a team environment) Compare & Pull Requesst into master for subsequent deployment to production.  
+  2) To create a branch.  In Eclispe project right click Team/Push Branch.  then name branch in two places- 1st page and next page.  it defaults to master on 2nd page.  then hit next and finish.
+  3) in a review envronment you would then review nad pull branch into master version when ready to deploy.
+  4) Once you create the first branch the commit and push function works without issue (w/o a branch there was some funkyness on attempting remote push, didnt write down the exact issues) 
+
+4) Pull/push requests
   1) [more to follow- see Git book].  I am mostly just doing Commit and Push functions, since I am the only one creating on project.  Pull/Push function is really for teams w multiple developers.
