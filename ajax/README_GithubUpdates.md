@@ -1,0 +1,7 @@
+Purpose: track process to upload changes to Git & GitHub repos.  I have local side git projects setup a couple different ways in Github as I am learning to use it.
+
+1) Ajax (this) PHP project is setup under a basic 'ajax post_mods'.  you just commit and push to remote (the 'ajax post_mods') in the 'Git Staging' tab below.  GitHub updates the master directly.
+
+2) CustSuptMaven Java project is setup in what I understand to be a more typical multicoder architecture (mca) as a learning experience.  Where I have a local project 'Master' and I upload that to a branch in GitHub ('remoteStore') vs the remote Master that is in Github.  In my local repo the local has a 'Master' decorator on the side of the project.  
+	-in this case, for ongoing updates you do a Commit in Git Staging below.  and then do a Team/Push Branch to the remote ('remoteStore' in Github).  In Github you then do a Pull request to pull that updated branch into the master (after a code review process, if it were a real team enviro).  In mca in the remote site (Github) is the thing that is the working Production deployment of the app.
+	-still have more to learn here.  See other git readme doc also and as a guideline for setting a new project as needed.
